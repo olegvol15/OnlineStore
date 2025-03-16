@@ -29,19 +29,88 @@ else
                     <td>@item.Name</td>
                     <td>@item.Price</td>
                     <td>
-                        <form method="post" asp-action="ModifyCart">
-                            <input type="hidden" name="productId" value="@item.ProductId" />
-                            <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control" style="width: 70px; display: inline-block;" />
-                            <button type="submit" class="btn btn-primary btn-sm">Змінити</button>
-                        </form>
+                        <input type="number" id="quantity-@item.ProductId" value="@item.Quantity" min="1" class="form-control" style="width: 70px; display: inline-block;" />
+                        <button class="btn btn-primary btn-sm" onclick="confirmModify(@item.ProductId, '@item.Name', @item.Quantity)">Змінити</button>
                     </td>
                     <td>@(item.Price * item.Quantity)</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(@item.ProductId, '@item.Name')">Видалити</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
     <form method="post" asp-action="ClearCart">
-    <button type="submit" class="btn btn-danger">Очистити кошик</button>
+        <button type="submit" class="btn btn-danger">Очистити кошик</button>
     </form>
- 
 }
+
+<!-- Bootstrap Modal для підтвердження видалення -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Підтвердження видалення</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <form method="post" asp-action="ModifyCart">
+                    <input type="hidden" id="deleteProductId" name="productId" />
+                    <input type="hidden" name="quantity" value="0" />
+                    <button type="submit" class="btn btn-danger">Так</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ні</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal для підтвердження зміни кількості -->
+<div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modifyModalLabel">Підтвердження зміни кількості</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modifyMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <form method="post" asp-action="ModifyCart">
+                    <input type="hidden" id="modifyProductId" name="productId" />
+                    <input type="hidden" id="modifyQuantity" name="quantity" />
+                    <button type="submit" class="btn btn-primary">Так</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ні</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(productId, productName) {
+            document.getElementById("deleteMessage").innerText = `Ви видаляєте позицію '${productName}' з кошику. Підтверджуєте?`;
+            document.getElementById("deleteProductId").value = productId;
+            let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+        }
+
+        function confirmModify(productId, productName, oldQuantity) {
+            let newQuantity = document.getElementById(`quantity-${productId}`).value;
+            if (newQuantity == oldQuantity) {
+                return;
+            }
+            document.getElementById("modifyMessage").innerText = `Ви змінюєте кількість замовлення '${productName}' з ${oldQuantity} до ${newQuantity} шт. Підтверджуєте?`;
+            document.getElementById("modifyProductId").value = productId;
+            document.getElementById("modifyQuantity").value = newQuantity;
+            let modifyModal = new bootstrap.Modal(document.getElementById('modifyModal'));
+            modifyModal.show();
+        }
+    </script>
+}
+

@@ -84,6 +84,7 @@ namespace OnlineStore.Controllers
             return RedirectToAction("Cart");
         }
 
+
         // Очистка корзины
         [HttpPost]
         public IActionResult ClearCart()
