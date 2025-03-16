@@ -7,6 +7,8 @@
 /Users/olegvolostnyh/OnlineStore/bin/Debug/net9.0/OnlineStore.runtimeconfig.json
 /Users/olegvolostnyh/OnlineStore/bin/Debug/net9.0/OnlineStore.dll
 /Users/olegvolostnyh/OnlineStore/bin/Debug/net9.0/OnlineStore.pdb
+/Users/olegvolostnyh/OnlineStore/bin/Debug/net9.0/Newtonsoft.Json.dll
+/Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.csproj.AssemblyReference.cache
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.GeneratedMSBuildEditorConfig.editorconfig
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.AssemblyInfoInputs.cache
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.AssemblyInfo.cs
@@ -14,6 +16,7 @@
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.MvcApplicationPartsAssemblyInfo.cache
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.RazorAssemblyInfo.cache
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.RazorAssemblyInfo.cs
+/Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.sourcelink.json
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/scopedcss/bundle/OnlineStore.styles.css
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/scopedcss/projectbundle/OnlineStore.bundle.scp.css
@@ -90,6 +93,7 @@
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.OnlineStore.props
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.OnlineStore.props
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/staticwebassets.pack.json
+/Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineSt.916B8FA7.Up2Date
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.dll
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/refint/OnlineStore.dll
 /Users/olegvolostnyh/OnlineStore/obj/Debug/net9.0/OnlineStore.pdb

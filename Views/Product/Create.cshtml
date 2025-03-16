@@ -1,22 +1,26 @@
 @model OnlineStore.Models.Product
 
+@{
+    ViewData["Title"] = "Додавання нового товару";
+}
+
 <h2>Додавання нового товару</h2>
 
 <form asp-action="Create" method="post">
-    <div>
-        <label asp-for="Name"></label>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
         <input asp-for="Name" class="form-control"/>
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="Price"></label>
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
         <input asp-for="Price" class="form-control"/>
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="Description"></label>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
         <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
@@ -24,6 +28,45 @@
     <button type="submit" class="btn btn-primary">Додати товар</button>
 </form>
 
+<!-- Bootstrap Modal for Alerts -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertModalLabel">Повідомлення</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="alertMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let successMessage = "@Html.Raw(TempData["SuccessMessage"])";
+            let errorMessage = "@Html.Raw(TempData["ErrorMessage"])";
+
+            if (successMessage || errorMessage) {
+                let message = successMessage ? successMessage : errorMessage;
+                let alertColor = successMessage ? "text-success" : "text-danger";
+
+                let alertMessageElement = document.getElementById("alertMessage");
+                alertMessageElement.innerText = message;
+                alertMessageElement.classList.add(alertColor);
+
+                let alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+                alertModal.show();
+            }
+        });
+    </script>
+
     <partial name="_ValidationScriptsPartial" />
 }
+
+

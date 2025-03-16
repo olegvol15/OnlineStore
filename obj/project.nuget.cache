@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "4ylvSBGyWh0=",
+  "dgSpecHash": "k/TJ2FTD4Js=",
   "success": true,
   "projectFilePath": "/Users/olegvolostnyh/OnlineStore/OnlineStore.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/olegvolostnyh/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
