@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Вхід";
+}
+
+<h2>Вхід</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<form method="post" asp-action="Login">
+    <div class="mb-3">
+        <label>Логін</label>
+        <input type="text" name="username" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Пароль</label>
+        <input type="password" name="password" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Увійти</button>
+</form>

@@ -1,32 +1,31 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using OnlineStore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Добавляем поддержку контроллеров с представлениями
 builder.Services.AddControllersWithViews();
 
-// Добавляем поддержку сессий
-builder.Services.AddSession();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
 
-// Добавляем поддержку доступа к HTTP-контексту
+builder.Services.AddAuthorization();
+builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
-// Регистрируем CartService как сервис
 builder.Services.AddScoped<CartService>();
 
 var app = builder.Build();
 
-// Конфигурация middleware
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
 app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
