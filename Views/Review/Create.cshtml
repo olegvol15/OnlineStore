@@ -1,0 +1,49 @@
+@model OnlineStore.Models.Review
+
+@{
+    ViewData["Title"] = "Відгук";
+}
+
+<h2>Залишити відгук</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label>Оцінка:</label>
+        <div class="star-rating">
+            @for (int i = 5; i >= 1; i--)
+            {
+                <input type="radio" name="Rating" id="star-@i" value="@i" />
+                <label for="star-@i">&#9733;</label>
+            }
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>Коментар:</label>
+        <textarea name="Comment" class="form-control">@Model?.Comment</textarea>
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Надіслати</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <style>
+        .star-rating input { display: none; }
+        .star-rating label {
+            font-size: 2rem;
+            color: gray;
+            cursor: pointer;
+        }
+        .star-rating input:checked ~ label,
+        .star-rating input:hover ~ label {
+            color: gold;
+        }
+    </style>
+}
