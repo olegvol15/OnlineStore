@@ -1,12 +1,21 @@
-@model List<OnlineStore.Models.CartItem>
+@model OnlineStore.Services.Cart
+
 
 @{
     ViewData["Title"] = "Кошик";
+    bool isClosed = Model.Status != "Активний";
 }
 
 <h2>Ваш кошик</h2>
 
-@if (Model.Count == 0)
+@if (Model.Status == "Оплачений" || Model.Status == "Скасований")
+{
+    <div class="alert alert-info">
+        Кошик: <strong>@Model.Status</strong> @Model.ClosedDate?.ToString("dd.MM.yyyy")
+    </div>
+}
+
+@if (Model.Items.Count == 0)
 {
     <p>Ваш кошик порожній.</p>
 }
@@ -23,35 +32,58 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Items)
             {
                 <tr>
                     <td>@item.Name</td>
                     <td>@item.Price</td>
                     <td>
-                        <input type="number" id="quantity-@item.ProductId" value="@item.Quantity" min="1" class="form-control" style="width: 70px; display: inline-block;" />
-                        <button class="btn btn-primary btn-sm" onclick="confirmModify(@item.ProductId, '@item.Name', @item.Quantity)">Змінити</button>
+                        @if (!isClosed)
+                        {
+                            <input type="number" id="quantity-@item.ProductId" value="@item.Quantity" min="1" class="form-control" style="width: 70px; display: inline-block;" />
+                            <button class="btn btn-primary btn-sm" onclick="confirmModify(@item.ProductId, '@item.Name', @item.Quantity)">Змінити</button>
+                        }
+                        else
+                        {
+                            @item.Quantity
+                        }
                     </td>
                     <td>@(item.Price * item.Quantity)</td>
                     <td>
-                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(@item.ProductId, '@item.Name')">Видалити</button>
+                        @if (!isClosed)
+                        {
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete(@item.ProductId, '@item.Name')">Видалити</button>
+                        }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <form method="post" asp-action="ClearCart">
-        <button type="submit" class="btn btn-danger">Очистити кошик</button>
-    </form>
+
+    @if (!isClosed)
+    {
+        <form method="post" asp-action="ClearCart">
+            <button type="submit" class="btn btn-danger">Очистити кошик</button>
+        </form>
+
+        <button class="btn btn-success mt-2" onclick="confirmAction('pay')">Оплатити</button>
+        <button class="btn btn-warning mt-2" onclick="confirmAction('cancel')">Скасувати</button>
+    }
+    else
+    {
+        <form method="post" asp-action="Repeat" asp-route-cartId="@Model.Id">
+            <button type="submit" class="btn btn-outline-secondary mt-2">Повторити замовлення</button>
+        </form>
+    }
 }
 
-<!-- Bootstrap Modal для підтвердження видалення -->
+<!-- Bootstrap Modal: Видалення -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Підтвердження видалення</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">Підтвердження видалення</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
             </div>
             <div class="modal-body">
                 <p id="deleteMessage"></p>
@@ -68,13 +100,13 @@ else
     </div>
 </div>
 
-<!-- Bootstrap Modal для підтвердження зміни кількості -->
+<!-- Bootstrap Modal: Зміна кількості -->
 <div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modifyModalLabel">Підтвердження зміни кількості</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">Підтвердження зміни кількості</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
             </div>
             <div class="modal-body">
                 <p id="modifyMessage"></p>
@@ -91,26 +123,53 @@ else
     </div>
 </div>
 
+<!-- Bootstrap Modal: Оплата / Скасування -->
+<div class="modal fade" id="actionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="actionForm" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Підтвердження</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="actionMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Так</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ні</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 @section Scripts {
     <script>
         function confirmDelete(productId, productName) {
             document.getElementById("deleteMessage").innerText = `Ви видаляєте позицію '${productName}' з кошику. Підтверджуєте?`;
             document.getElementById("deleteProductId").value = productId;
-            let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-            deleteModal.show();
+            new bootstrap.Modal(document.getElementById('deleteModal')).show();
         }
 
         function confirmModify(productId, productName, oldQuantity) {
             let newQuantity = document.getElementById(`quantity-${productId}`).value;
-            if (newQuantity == oldQuantity) {
-                return;
-            }
+            if (newQuantity == oldQuantity || newQuantity <= 0) return;
             document.getElementById("modifyMessage").innerText = `Ви змінюєте кількість замовлення '${productName}' з ${oldQuantity} до ${newQuantity} шт. Підтверджуєте?`;
             document.getElementById("modifyProductId").value = productId;
             document.getElementById("modifyQuantity").value = newQuantity;
-            let modifyModal = new bootstrap.Modal(document.getElementById('modifyModal'));
-            modifyModal.show();
+            new bootstrap.Modal(document.getElementById('modifyModal')).show();
+        }
+
+        function confirmAction(type) {
+            const message = type === 'pay'
+                ? "Ви дійсно хочете оплатити кошик?"
+                : "Ви дійсно хочете скасувати кошик?";
+            document.getElementById('actionMessage').innerText = message;
+            document.getElementById('actionForm').action = '/Product/' + (type === 'pay' ? 'Pay' : 'Cancel');
+            new bootstrap.Modal(document.getElementById('actionModal')).show();
         }
     </script>
 }
+
 

@@ -3,84 +3,84 @@ using Newtonsoft.Json;
 using OnlineStore.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineStore.Services
 {
+    public class Cart
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string UserId { get; set; } = default!;
+        public string Status { get; set; } = "Активний";
+        public DateTime? ClosedDate { get; set; }
+        public List<CartItem> Items { get; set; } = new();
+    }
+
     public class CartService
     {
         private readonly ISession _session;
-        private const string CartKey = "Cart";
         private readonly IHttpContextAccessor _httpContextAccessor;
+
+        private const string CartKeyPrefix = "Cart_";
 
         public CartService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
             _session = httpContextAccessor.HttpContext?.Session 
-                       ?? throw new ArgumentNullException(nameof(httpContextAccessor), "Session is not available.");
+                ?? throw new ArgumentNullException(nameof(httpContextAccessor), "Session is not available.");
         }
 
-        // Получить корзину текущего пользователя
-        public List<CartItem> GetCart()
+        private string GetUserId()
         {
-            var cartJson = _session.GetString(CartKey);
-            return cartJson == null 
-                ? new List<CartItem>() 
-                : JsonConvert.DeserializeObject<List<CartItem>>(cartJson) ?? new List<CartItem>();
+            var userId = _httpContextAccessor.HttpContext?.User?.Identity?.Name;
+            if (string.IsNullOrEmpty(userId))
+                throw new UnauthorizedAccessException("Користувач не авторизований!");
+            return userId;
         }
 
-        // Добавить товар в корзину
+        private string GetCartKey(string userId) => $"{CartKeyPrefix}{userId}";
+
+        public Cart GetCart(string userId)
+        {
+            var cartJson = _session.GetString(GetCartKey(userId));
+            return string.IsNullOrEmpty(cartJson)
+                ? new Cart { UserId = userId }
+                : JsonConvert.DeserializeObject<Cart>(cartJson) ?? new Cart { UserId = userId };
+        }
+
         public void AddToCart(CartItem item)
         {
-            var cart = GetCart();
-            var userId = _httpContextAccessor.HttpContext?.User?.Identity?.Name;
+            var userId = GetUserId();
+            var cart = GetCart(userId);
 
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new UnauthorizedAccessException("Користувач не авторизований!");
-            }
-
-            item.UserId = userId; // Привязываем товар к пользователю
-
-            var existingItem = cart.Find(i => i.ProductId == item.ProductId && i.UserId == userId);
-
+            var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == item.ProductId);
             if (existingItem != null)
             {
                 existingItem.Quantity += item.Quantity;
             }
             else
             {
-                cart.Add(item);
+                item.UserId = userId;
+                cart.Items.Add(item);
             }
 
             SaveCart(cart);
         }
 
-        // Изменить количество товара в корзине
-        public void ModifyCart(int productId, int newQuantity)
+        public void ModifyCart(int productId, int newQuantity, string userId)
         {
-            var cart = GetCart();
-            var userId = _httpContextAccessor.HttpContext?.User?.Identity?.Name;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new UnauthorizedAccessException("Користувач не авторизований!");
-            }
-
-            var item = cart.Find(i => i.ProductId == productId && i.UserId == userId);
+            var cart = GetCart(userId);
+            var item = cart.Items.FirstOrDefault(i => i.ProductId == productId);
 
             if (item == null)
-            {
                 throw new KeyNotFoundException("Товар не знайдено у кошику!");
-            }
 
             if (item.UserId != userId)
-            {
                 throw new UnauthorizedAccessException("Цей товар не належить поточному користувачеві!");
-            }
 
             if (newQuantity <= 0)
             {
-                cart.Remove(item);
+                cart.Items.Remove(item);
             }
             else
             {
@@ -90,18 +90,64 @@ namespace OnlineStore.Services
             SaveCart(cart);
         }
 
-
-        // Очистить корзину
-        public void ClearCart()
+        public void ClearCart(string userId)
         {
-            _session.Remove(CartKey);
+            _session.Remove(GetCartKey(userId));
         }
 
-        // Сохранить корзину в сессии
-        private void SaveCart(List<CartItem> cart)
+        public void CloseCart(string userId, string status)
         {
-            _session.SetString(CartKey, JsonConvert.SerializeObject(cart));
+            var cart = GetCart(userId);
+            if (cart.Status != "Активний") return;
+
+            cart.Status = status;
+            cart.ClosedDate = DateTime.Now;
+
+            SaveCart(cart);
+        }
+
+        public void RepeatCart(Guid cartId, string userId)
+        {
+            // Получаем исходный кошик из истории (в простом случае — из TempData, файла или базы)
+            // Здесь эмулируем поведение через текущую сессию (если закрытая корзина ещё доступна)
+            var closedCart = GetCart(userId);
+            if (closedCart.Id != cartId || closedCart.Status == "Активний")
+                return;
+
+            var newCart = GetCart(userId);
+            if (newCart.Status != "Активний")
+                newCart = new Cart { UserId = userId };
+
+            foreach (var item in closedCart.Items)
+            {
+                var existing = newCart.Items.FirstOrDefault(i => i.ProductId == item.ProductId);
+                if (existing != null)
+                {
+                    existing.Quantity += item.Quantity;
+                }
+                else
+                {
+                    newCart.Items.Add(new CartItem
+                    {
+                        ProductId = item.ProductId,
+                        Name = item.Name,
+                        Price = item.Price,
+                        Quantity = item.Quantity,
+                        UserId = userId
+                    });
+                }
+            }
+
+            newCart.Status = "Активний";
+            newCart.ClosedDate = null;
+            SaveCart(newCart);
+        }
+
+        private void SaveCart(Cart cart)
+        {
+            _session.SetString(GetCartKey(cart.UserId), JsonConvert.SerializeObject(cart));
         }
     }
 }
+
 

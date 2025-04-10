@@ -16,14 +16,14 @@ namespace OnlineStore.Controllers
             _cartService = cartService;
         }
 
-        // Форма добавления товара
+        // GET: Форма додавання товару
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // Добавление товара в корзину
+        // POST: Додавання товару в кошик
         [HttpPost]
         public IActionResult Create(Product product)
         {
@@ -33,8 +33,7 @@ namespace OnlineStore.Controllers
                 return View(product);
             }
 
-            var userId = User.Identity?.Name; // Получаем ID авторизованного пользователя
-
+            var userId = User.Identity?.Name;
             if (string.IsNullOrEmpty(userId))
             {
                 TempData["ErrorMessage"] = "Необхідна авторизація для додавання товару!";
@@ -47,7 +46,7 @@ namespace OnlineStore.Controllers
                 Name = product.Name,
                 Price = product.Price,
                 Quantity = 1,
-                UserId = userId // Привязываем товар к владельцу
+                UserId = userId
             };
 
             _cartService.AddToCart(cartItem);
@@ -55,21 +54,25 @@ namespace OnlineStore.Controllers
             return RedirectToAction("Cart");
         }
 
-        // Отображение корзины
+        // GET: Перегляд кошика
         [HttpGet]
         public IActionResult Cart()
         {
-            var cart = _cartService.GetCart();
+            var userId = User.Identity?.Name;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var cart = _cartService.GetCart(userId);
             return View(cart);
         }
 
-        // Изменение количества товара в корзине
+        // POST: Зміна кількості товару
         [HttpPost]
         public IActionResult ModifyCart(int productId, int quantity)
         {
             try
             {
-                _cartService.ModifyCart(productId, quantity);
+                _cartService.ModifyCart(productId, quantity, User.Identity?.Name!);
                 TempData["SuccessMessage"] = "Кількість товару у кошику оновлено!";
             }
             catch (UnauthorizedAccessException ex)
@@ -84,17 +87,60 @@ namespace OnlineStore.Controllers
             return RedirectToAction("Cart");
         }
 
-
-        // Очистка корзины
+        // POST: Очищення кошика
         [HttpPost]
         public IActionResult ClearCart()
         {
-            _cartService.ClearCart();
+            var userId = User.Identity?.Name;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            _cartService.ClearCart(userId);
             TempData["SuccessMessage"] = "Кошик очищено!";
+            return RedirectToAction("Cart");
+        }
+
+        // POST: Оплата кошика
+        [HttpPost]
+        public IActionResult Pay()
+        {
+            var userId = User.Identity?.Name;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            _cartService.CloseCart(userId, "Оплачений");
+            TempData["SuccessMessage"] = "Кошик оплачено!";
+            return RedirectToAction("Cart");
+        }
+
+        // POST: Скасування кошика
+        [HttpPost]
+        public IActionResult Cancel()
+        {
+            var userId = User.Identity?.Name;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            _cartService.CloseCart(userId, "Скасований");
+            TempData["SuccessMessage"] = "Кошик скасовано!";
+            return RedirectToAction("Cart");
+        }
+
+        // POST: Повторити замовлення
+        [HttpPost]
+        public IActionResult Repeat(Guid cartId)
+        {
+            var userId = User.Identity?.Name;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            _cartService.RepeatCart(cartId, userId);
+            TempData["SuccessMessage"] = "Замовлення повторено!";
             return RedirectToAction("Cart");
         }
     }
 }
+
 
 
 
