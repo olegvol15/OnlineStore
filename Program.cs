@@ -17,6 +17,8 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<CartService>();
+builder.Services.AddSingleton<ReviewService>();
+
 
 var app = builder.Build();
 

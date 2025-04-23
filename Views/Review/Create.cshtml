@@ -12,20 +12,25 @@
 }
 
 <form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
     <div class="mb-3">
         <label>Оцінка:</label>
         <div class="star-rating">
             @for (int i = 5; i >= 1; i--)
             {
-                <input type="radio" name="Rating" id="star-@i" value="@i" />
+                <input asp-for="Rating" type="radio" id="star-@i" value="@i" />
                 <label for="star-@i">&#9733;</label>
             }
         </div>
+        <span asp-validation-for="Rating" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label>Коментар:</label>
-        <textarea name="Comment" class="form-control">@Model?.Comment</textarea>
+        <textarea asp-for="Comment" class="form-control"></textarea>
         <span asp-validation-for="Comment" class="text-danger"></span>
     </div>
 
@@ -47,3 +52,4 @@
         }
     </style>
 }
+

@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using OnlineStore.Models;
@@ -20,7 +21,6 @@ namespace OnlineStore.Services
     {
         private readonly ISession _session;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
         private const string CartKeyPrefix = "Cart_";
 
         public CartService(IHttpContextAccessor httpContextAccessor)
@@ -43,9 +43,33 @@ namespace OnlineStore.Services
         public Cart GetCart(string userId)
         {
             var cartJson = _session.GetString(GetCartKey(userId));
-            return string.IsNullOrEmpty(cartJson)
-                ? new Cart { UserId = userId }
-                : JsonConvert.DeserializeObject<Cart>(cartJson) ?? new Cart { UserId = userId };
+            if (string.IsNullOrEmpty(cartJson))
+            {
+                return new Cart
+                {
+                    UserId = userId,
+                    Status = "Активний",
+                    Items = new List<CartItem>()
+                };
+            }
+
+            var cart = JsonConvert.DeserializeObject<Cart>(cartJson);
+            if (cart == null)
+            {
+                return new Cart
+                {
+                    UserId = userId,
+                    Status = "Активний",
+                    Items = new List<CartItem>()
+                };
+            }
+
+            return cart;
+        }
+
+        private void SaveCart(Cart cart)
+        {
+            _session.SetString(GetCartKey(cart.UserId), JsonConvert.SerializeObject(cart));
         }
 
         public void AddToCart(CartItem item)
@@ -108,8 +132,6 @@ namespace OnlineStore.Services
 
         public void RepeatCart(Guid cartId, string userId)
         {
-            // Получаем исходный кошик из истории (в простом случае — из TempData, файла или базы)
-            // Здесь эмулируем поведение через текущую сессию (если закрытая корзина ещё доступна)
             var closedCart = GetCart(userId);
             if (closedCart.Id != cartId || closedCart.Status == "Активний")
                 return;
@@ -141,11 +163,6 @@ namespace OnlineStore.Services
             newCart.Status = "Активний";
             newCart.ClosedDate = null;
             SaveCart(newCart);
-        }
-
-        private void SaveCart(Cart cart)
-        {
-            _session.SetString(GetCartKey(cart.UserId), JsonConvert.SerializeObject(cart));
         }
     }
 }

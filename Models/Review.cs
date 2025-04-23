@@ -16,16 +16,13 @@ namespace OnlineStore.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        public int ProductId { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (string.IsNullOrWhiteSpace(Comment) && Rating == null)
             {
-                yield return new ValidationResult("Потрібно вказати або оцінку, або коментар (або обидва)");
-            }
-
-            if (!string.IsNullOrWhiteSpace(Comment) && Comment.Length < 5)
-            {
-                yield return new ValidationResult("Коментар має містити щонайменше 5 символів");
+                yield return new ValidationResult("Потрібно вказати або оцінку, або коментар ( або обидва )");
             }
         }
     }

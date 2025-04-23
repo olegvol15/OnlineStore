@@ -1,0 +1,40 @@
+@model OnlineStore.Models.ViewModels.ProductDetailsViewModel
+
+<h2>@Model.Product.Name</h2>
+<p>@Model.Product.Description</p>
+<p><strong>Ціна:</strong> @Model.Product.Price ₴</p>
+
+<hr />
+
+<h4>Відгуки:</h4>
+
+<a asp-controller="Review" asp-action="Create" asp-route-productId="@Model.Product.Id" class="btn btn-primary mb-3">Залишити відгук</a>
+
+<div style="max-height: 250px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+    @if (Model.Reviews.Any())
+    {
+        <ul class="list-unstyled">
+            @foreach (var review in Model.Reviews)
+            {
+                <li class="mb-3 border-bottom pb-2">
+                    <strong>Оцінка:</strong> @review.Rating <br />
+                    <strong>Коментар:</strong> @review.Comment <br />
+                    <small class="text-muted">
+                        @if (review.CreatedAt.Date == DateTime.Today)
+                        {
+                            @review.CreatedAt.ToString("HH:mm")
+                        }
+                        else
+                        {
+                            @review.CreatedAt.ToString("dd.MM.yyyy")
+                        }
+                    </small>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Наразі відгуків немає. Будьте першим, хто залишить відгук!</p>
+    }
+</div>

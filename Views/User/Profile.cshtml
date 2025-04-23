@@ -1,0 +1,41 @@
+@model OnlineStore.Models.ViewModels.UserProfileViewModel
+
+@{
+    ViewData["Title"] = $"Профіль користувача {Model.Username}";
+    bool isOwner = User.Identity?.IsAuthenticated == true && User.Identity.Name == Model.Username;
+}
+
+<h2 class="mb-3">Профіль: @Model.Username</h2>
+
+<div class="mb-4">
+    <p><strong>Email:</strong> @Model.Email</p>
+</div>
+
+@if (isOwner)
+{
+    <h3>Історія покупок</h3>
+
+    @if (Model.Orders != null && Model.Orders.Any())
+    {
+        <ul class="list-group">
+            @foreach (var order in Model.Orders)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>@order.ProductName</span>
+                    <span class="text-muted">@order.PurchaseDate.ToString("dd.MM.yyyy")</span>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="text-muted">Немає історії покупок.</p>
+    }
+}
+else
+{
+    <div class="alert alert-secondary">
+        <em>Історія покупок недоступна для перегляду іншими користувачами.</em>
+    </div>
+}
+
