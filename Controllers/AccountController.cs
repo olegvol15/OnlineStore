@@ -18,7 +18,7 @@ namespace OnlineStore.Controllers
         public async Task<IActionResult> Login(string username, string password)
         {
             // Заглушка: заменить на реальную проверку пользователя
-            if ((username == "admin" && password == "1234") || (username == "user" && password == "user15"))
+            if ((username == "admin@gmail.com" && password == "123456") || (username == "user@gmail.com" && password == "user1515"))
             {
                 var claims = new List<Claim>
                 {

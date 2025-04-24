@@ -22,3 +22,30 @@
 
     <button type="submit" class="btn btn-primary">Увійти</button>
 </form>
+
+@section Scripts {
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const username = document.querySelector('input[name="username"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            let errors = [];
+
+            if (!username.includes('@@')) {
+                errors.push("Некоректна електронна адреса.");
+            }
+
+            if (password.length < 6) {
+                errors.push("Пароль повинен містити щонайменше 6 символів.");
+            }
+
+            if (errors.length > 0) {
+                e.preventDefault(); // зупиняє надсилання форми
+                alert(errors.join('\n'));
+            }
+        });
+    </script>
+}
+
+
+
+
