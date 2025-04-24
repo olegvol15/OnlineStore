@@ -28,6 +28,8 @@ builder.Services.AddAuthorization();
 // 🔧 3. DI-сервіси
 builder.Services.AddScoped<CartService>();
 builder.Services.AddSingleton<ReviewService>();
+builder.Services.AddScoped<DataAccessor>();
+
 
 var app = builder.Build();
 
@@ -51,6 +53,24 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    if (!context.Categories.Any())
+    {
+        context.Categories.AddRange(
+            new Category { Name = "Іграшки", ImageUrl = "toys.jpg" },
+            new Category { Name = "Канцелярія", ImageUrl = "office.jpeg" },
+            new Category { Name = "Косметика", ImageUrl = "beauty.jpg" },
+            new Category { Name = "Продукти", ImageUrl = "food.jpg" },
+            new Category { Name = "Електроніка", ImageUrl = "electronics.jpg" }
+        );
+        context.SaveChanges();
+    }
+}
+
 
 app.Run();
 

@@ -9,6 +9,9 @@ public class AppDbContext : DbContext
     public DbSet<Promotion> Promotions { get; set; }
     public DbSet<ProductPromotion> ProductPromotions { get; set; }
 
+    public DbSet<Category> Categories { get; set; }
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
@@ -30,7 +33,7 @@ public class AppDbContext : DbContext
     modelBuilder.Entity<Promotion>().HasData(
         new Promotion { Id = 1, Title = "Весняна знижка", DiscountPercentage = 10, StartDate = DateTime.Today, EndDate = DateTime.Today.AddDays(10) }
     );
-
+ 
     modelBuilder.Entity<Product>().HasData(
         new Product { Id = 1, Name = "Кіт", Description = "Іграшковий кіт", Price = 300 }
     );

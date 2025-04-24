@@ -1,0 +1,28 @@
+@model List<OnlineStore.Models.Dto.CategoryDto>
+
+@{
+    ViewData["Title"] = "Категорії";
+}
+
+<h2>Список категорій</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var category in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="@category.ImageUrl" alt="@category.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@category.Name</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Категорії відсутні.</p>
+}

@@ -13,6 +13,26 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/beauty.jpg",
+      "PackagePath": "staticwebassets/images/categories/beauty.jpg"
+    },
+    {
+      "Id": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/electronics.jpg",
+      "PackagePath": "staticwebassets/images/categories/electronics.jpg"
+    },
+    {
+      "Id": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/food.jpg",
+      "PackagePath": "staticwebassets/images/categories/food.jpg"
+    },
+    {
+      "Id": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/office.jpeg",
+      "PackagePath": "staticwebassets/images/categories/office.jpeg"
+    },
+    {
+      "Id": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/toys.jpg",
+      "PackagePath": "staticwebassets/images/categories/toys.jpg"
+    },
+    {
       "Id": "/Users/olegvolostnyh/OnlineStore/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

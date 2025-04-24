@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qip9smaAe4NA0jHjQvS3vQvjKVM1wO/AXLSnUggyyUg=",
+  "Hash": "9mF9RabYC2EbX5FHo/L9Cnc83+7n4EHegCx17IhQqrA=",
   "Source": "OnlineStore",
   "BasePath": "_content/OnlineStore",
   "Mode": "Default",
@@ -1443,6 +1443,111 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/beauty.jpg",
+      "SourceId": "OnlineStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/olegvolostnyh/OnlineStore/wwwroot/",
+      "BasePath": "_content/OnlineStore",
+      "RelativePath": "images/categories/beauty#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fzh987ppva",
+      "Integrity": "SxdyNAkp2qggK1BqGfze/CCTREj/WH8LyQAPSSbJ6DI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/categories/beauty.jpg"
+    },
+    {
+      "Identity": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/electronics.jpg",
+      "SourceId": "OnlineStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/olegvolostnyh/OnlineStore/wwwroot/",
+      "BasePath": "_content/OnlineStore",
+      "RelativePath": "images/categories/electronics#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "z1s13db973",
+      "Integrity": "R2shKz9v0WJo4o+Edk+GeR1c22SBCPlthvYI6UWEk10=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/categories/electronics.jpg"
+    },
+    {
+      "Identity": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/food.jpg",
+      "SourceId": "OnlineStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/olegvolostnyh/OnlineStore/wwwroot/",
+      "BasePath": "_content/OnlineStore",
+      "RelativePath": "images/categories/food#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ok1yb287bt",
+      "Integrity": "iFANBQlqCs/11CRkK3t0Nzf1dvOg85gI7eM9KewVk7w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/categories/food.jpg"
+    },
+    {
+      "Identity": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/office.jpeg",
+      "SourceId": "OnlineStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/olegvolostnyh/OnlineStore/wwwroot/",
+      "BasePath": "_content/OnlineStore",
+      "RelativePath": "images/categories/office#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "o0fosci3od",
+      "Integrity": "+HF7wAtzKausZ+7W4GTLL+myGiszYUJpZAYU3z+Feos=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/categories/office.jpeg"
+    },
+    {
+      "Identity": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/toys.jpg",
+      "SourceId": "OnlineStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/olegvolostnyh/OnlineStore/wwwroot/",
+      "BasePath": "_content/OnlineStore",
+      "RelativePath": "images/categories/toys#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "e9zh75wm0r",
+      "Integrity": "PhhjgLbJlsOY54Xjv/ay16LepkyU3Obh0RI2h8MLbao=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/categories/toys.jpg"
     },
     {
       "Identity": "/Users/olegvolostnyh/OnlineStore/wwwroot/js/site.js",
@@ -3320,6 +3425,416 @@
         {
           "Name": "integrity",
           "Value": "sha256-+/824NtfTA0L7Mr42Fo+86YJP4R5cigdi9S7Fx5VVl4="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/beauty.fzh987ppva.jpg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/beauty.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "47992"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SxdyNAkp2qggK1BqGfze/CCTREj/WH8LyQAPSSbJ6DI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 18:07:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fzh987ppva"
+        },
+        {
+          "Name": "label",
+          "Value": "images/categories/beauty.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SxdyNAkp2qggK1BqGfze/CCTREj/WH8LyQAPSSbJ6DI="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/beauty.jpg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/beauty.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "47992"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SxdyNAkp2qggK1BqGfze/CCTREj/WH8LyQAPSSbJ6DI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 18:07:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SxdyNAkp2qggK1BqGfze/CCTREj/WH8LyQAPSSbJ6DI="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/electronics.jpg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/electronics.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "46316"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"R2shKz9v0WJo4o+Edk+GeR1c22SBCPlthvYI6UWEk10=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 18:07:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-R2shKz9v0WJo4o+Edk+GeR1c22SBCPlthvYI6UWEk10="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/electronics.z1s13db973.jpg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/electronics.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "46316"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"R2shKz9v0WJo4o+Edk+GeR1c22SBCPlthvYI6UWEk10=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 18:07:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "z1s13db973"
+        },
+        {
+          "Name": "label",
+          "Value": "images/categories/electronics.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-R2shKz9v0WJo4o+Edk+GeR1c22SBCPlthvYI6UWEk10="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/food.jpg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/food.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "916668"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iFANBQlqCs/11CRkK3t0Nzf1dvOg85gI7eM9KewVk7w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 18:07:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-iFANBQlqCs/11CRkK3t0Nzf1dvOg85gI7eM9KewVk7w="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/food.ok1yb287bt.jpg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/food.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "916668"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iFANBQlqCs/11CRkK3t0Nzf1dvOg85gI7eM9KewVk7w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 18:07:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ok1yb287bt"
+        },
+        {
+          "Name": "label",
+          "Value": "images/categories/food.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-iFANBQlqCs/11CRkK3t0Nzf1dvOg85gI7eM9KewVk7w="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/office.jpeg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/office.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "664354"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+HF7wAtzKausZ+7W4GTLL+myGiszYUJpZAYU3z+Feos=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 17:59:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+HF7wAtzKausZ+7W4GTLL+myGiszYUJpZAYU3z+Feos="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/office.o0fosci3od.jpeg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/office.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "664354"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+HF7wAtzKausZ+7W4GTLL+myGiszYUJpZAYU3z+Feos=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 17:59:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o0fosci3od"
+        },
+        {
+          "Name": "label",
+          "Value": "images/categories/office.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+HF7wAtzKausZ+7W4GTLL+myGiszYUJpZAYU3z+Feos="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/toys.e9zh75wm0r.jpg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/toys.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54384"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PhhjgLbJlsOY54Xjv/ay16LepkyU3Obh0RI2h8MLbao=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 17:59:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "e9zh75wm0r"
+        },
+        {
+          "Name": "label",
+          "Value": "images/categories/toys.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhhjgLbJlsOY54Xjv/ay16LepkyU3Obh0RI2h8MLbao="
+        }
+      ]
+    },
+    {
+      "Route": "images/categories/toys.jpg",
+      "AssetFile": "/Users/olegvolostnyh/OnlineStore/wwwroot/images/categories/toys.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54384"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PhhjgLbJlsOY54Xjv/ay16LepkyU3Obh0RI2h8MLbao=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 24 Apr 2025 17:59:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PhhjgLbJlsOY54Xjv/ay16LepkyU3Obh0RI2h8MLbao="
         }
       ]
     },
