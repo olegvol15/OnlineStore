@@ -17,5 +17,8 @@ namespace OnlineStore.Models
         [Required(ErrorMessage = "Опис є обов'язковим.")]
         [StringLength(500, ErrorMessage = "Опис не може перевищувати 500 символів.")]
         public string Description { get; set; }
+
+        public List<ProductPromotion> ProductPromotions { get; set; } = new();
+
     }
 }

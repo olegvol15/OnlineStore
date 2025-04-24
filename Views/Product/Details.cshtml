@@ -4,6 +4,29 @@
 <p>@Model.Product.Description</p>
 <p><strong>Ціна:</strong> @Model.Product.Price ₴</p>
 
+@if (Model.Promotions.Any())
+{
+    <div class="alert alert-success mt-3">
+        <h5>Актуальні акції:</h5>
+        <ul>
+            @foreach (var promo in Model.Promotions)
+            {
+                <li>
+                    <strong>@promo.Title</strong> — @promo.DiscountPercentage% знижка
+                    <br />
+                    <small class="text-muted">
+                        Діє з @promo.StartDate.ToString("dd.MM.yyyy") по @promo.EndDate.ToString("dd.MM.yyyy")
+                    </small>
+                    @if (!string.IsNullOrWhiteSpace(promo.Description))
+                    {
+                        <div><em>@promo.Description</em></div>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+}
+
 <hr />
 
 <h4>Відгуки:</h4>
@@ -38,3 +61,4 @@
         <p>Наразі відгуків немає. Будьте першим, хто залишить відгук!</p>
     }
 </div>
+

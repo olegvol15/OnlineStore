@@ -7,5 +7,7 @@ namespace OnlineStore.Models.ViewModels
     {
         public Product Product { get; set; } = new();
         public List<Review> Reviews { get; set; } = new();
+        public List<Promotion> Promotions { get; set; } = new(); 
     }
 }
+

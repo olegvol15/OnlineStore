@@ -13,13 +13,14 @@ namespace OnlineStore.Controllers
     {
         private readonly CartService _cartService;
         private readonly ReviewService _reviewService;
+        private readonly AppDbContext _context;
 
-        public ProductController(CartService cartService, ReviewService reviewService)
+        public ProductController(CartService cartService, ReviewService reviewService, AppDbContext context)
         {
             _cartService = cartService;
             _reviewService = reviewService;
+            _context = context;
         }
-
 
         [HttpGet]
         public IActionResult Create()
@@ -136,26 +137,26 @@ namespace OnlineStore.Controllers
 
         public IActionResult Details(int id)
         {
-            var product = new Product
-            {
-                Id = id,
-                Name = "Кіт",
-                Price = 300,
-                Description = "Іграшковий кіт"
-            };
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null) return NotFound();
 
             var reviews = _reviewService.GetReviewsForProduct(id);
+
+            var promotions = _context.ProductPromotions
+                .Where(pp => pp.ProductId == id)
+                .Select(pp => pp.Promotion)
+                .Where(p => p.StartDate <= DateTime.Today && p.EndDate >= DateTime.Today)
+                .ToList();
 
             var vm = new ProductDetailsViewModel
             {
                 Product = product,
-                Reviews = reviews
+                Reviews = reviews,
+                Promotions = promotions
             };
 
             return View(vm);
         }
-
-
     }
 }
 
